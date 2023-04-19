@@ -1,0 +1,376 @@
+[
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "_agentName",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "_agentAddress",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "_agentId",
+				"type": "uint256"
+			}
+		],
+		"name": "agentRegistered",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "_brokerName",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "_brokerAddress",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "_brokerId",
+				"type": "uint256"
+			}
+		],
+		"name": "brokerRegistered",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "_customerName",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "_customerAddress",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "_customerId",
+				"type": "uint256"
+			}
+		],
+		"name": "customerRegistered",
+		"type": "event"
+	},
+	{
+		"inputs": [],
+		"name": "agentIds",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "agentRegister",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "agentName",
+				"type": "string"
+			},
+			{
+				"internalType": "address",
+				"name": "agentAddress",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "agentId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "agentPhoneNumber",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bool",
+				"name": "agentAlreadySignedIn",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "agentSignIn",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "agentSignOut",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "brokerIds",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "brokersRegister",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "brokerName",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "brokerFee",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "brokerId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "brokerPhone",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "brokerAddress",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "customerIds",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "customerRegister",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "customerName",
+				"type": "string"
+			},
+			{
+				"internalType": "address",
+				"name": "customerAddress",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "customerId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bool",
+				"name": "customerAlreadySignedIn",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "customerSignIn",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "customerSignOut",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "numberToIncrease",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "numberToIncrease2",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_agentName",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_agentPhoneNumber",
+				"type": "uint256"
+			}
+		],
+		"name": "registerAgent",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_customerName",
+				"type": "string"
+			}
+		],
+		"name": "registerCustomer",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_brokerName",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_brokerFee",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_brokerPhone",
+				"type": "uint256"
+			}
+		],
+		"name": "registerMortgageBroke",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "seeAllBrokers",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "brokerName",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "brokerFee",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "brokerId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "brokerPhone",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "brokerAddress",
+						"type": "address"
+					}
+				],
+				"internalType": "struct TulipPropertySearch.MortgageBroker[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+]

@@ -2,10 +2,127 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from '@next/font/google'
 import styles from 'auction/styles/Home.module.css'
-
-const inter = Inter({ subsets: ['latin'] })
+import { ethers } from 'ethers';
+import abi from '../utils/contractAbi.json';
+import { useState } from 'react';
+import Link from 'next/link';
 
 export default function Home() {
+  const contractAddress = '0xC0530B2CEad65b3d3A962891bCc6F8800E08cB4F';
+  const [customerName, setCustomerName] = useState();
+  const [agentName, setAgentName] = useState();
+  const [agentNumber, setAgentNumber] = useState();
+  const [brokerName, setBrokerName] = useState();
+  const [brokerNumber, setBrokerNumber] = useState();
+  const [brokerFee, setBrokerFee] = useState();
+
+  const [brokerList, setBrokerList] = useState();
+
+
+
+  // register fxn -------tick
+  // SignIn fxn ------tick
+  // register as Agent ----tick
+  // mortgage broker register function ----tick
+  // morgage broker list function -----tick
+
+  // create mortagage brokers page
+  // create solicitors page
+  // List proprty page - only agents can list property
+  // 
+
+
+  const consumerRegister = async () => {
+    const { ethereum } = window;
+    const accounts = await ethereum.request({ method: "eth_accounts"});
+
+    if(accounts.length !== 0) {
+      const provider = new ethers.providers.Web3Provider(ethereum);
+      const signer = await provider.getSigner();
+      const contract = new ethers.Contract(contractAddress, abi, signer);
+      const consumerReg = await contract.registerCustomer(customerName);
+      await consumerReg.wait();
+      alert('Done: Registered');
+
+    }else{
+      alert("Please connect wallet");
+    }
+
+  }
+  const brokerRegister = async () => {
+    const { ethereum } = window;
+    const accounts = await ethereum.request({ method: "eth_accounts"});
+
+    if(accounts.length !== 0) {
+      const provider = new ethers.providers.Web3Provider(ethereum);
+      const signer = await provider.getSigner();
+      const contract = new ethers.Contract(contractAddress, abi, signer);
+      const brokerReg = await contract.registerMortgageBroke(brokerName, brokerFee, brokerNumber);
+      await brokerReg.wait();
+      alert('Done: Registered as Mortgage broker');
+
+    }else{
+      alert("Please connect wallet");
+    }
+
+  }
+  const agentRegister = async () => {
+    const { ethereum } = window;
+    const accounts = await ethereum.request({ method: "eth_accounts"});
+
+    if(accounts.length !== 0) {
+      const provider = new ethers.providers.Web3Provider(ethereum);
+      const signer = await provider.getSigner();
+      const contract = new ethers.Contract(contractAddress, abi, signer);
+      const agentReg = await contract.registerAgent(agentName, agentNumber);
+      await agentReg.wait();
+      alert('Done: Registered as agent');
+
+    }else{
+      alert("Please connect wallet");
+    }
+
+  }
+  
+  const consumerSignin = async () => {
+    const { ethereum } = window;
+    const accounts = await ethereum.request({ method: "eth_accounts"});
+
+    if(accounts.length !== 0) {
+      const provider = new ethers.providers.Web3Provider(ethereum);
+      const signer = await provider.getSigner();
+      const contract = new ethers.Contract(contractAddress, abi, signer);
+      const customerSignin = await contract.customerSignIn();
+      await customerSignin.wait();
+      alert('Done: Signed in, carry on with your transactions');
+
+    }else{
+      alert("Please connect wallet");
+    }
+
+  }
+
+  const SeeBrokers = async () => {
+    const { ethereum } = window;
+    const accounts = await ethereum.request({ method: "eth_accounts"});
+
+    if(accounts.length !== 0) {
+      const provider = new ethers.providers.Web3Provider(ethereum);
+      const signer = provider.getSigner();
+      const contract = new ethers.Contract(contractAddress, abi, signer);
+      const brokerResult= await contract.seeAllBrokers();
+      setBrokerList(brokerResult);
+      console.log(brokerList);
+     
+
+    }else{
+      alert("Please connect wallet");
+    }
+
+  }
+
+
+
   return (
     <>
       <Head>
@@ -14,109 +131,56 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
-        <div className={styles.description}>
-          <p>
-            Get started by editing&nbsp;
-            <code className={styles.code}>src/pages/index.js</code>
-          </p>
-          <div>
-            <a
-              href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              By{' '}
-              <Image
-                src="/vercel.svg"
-                alt="Vercel Logo"
-                className={styles.vercelLogo}
-                width={100}
-                height={24}
-                priority
-              />
-            </a>
+      <main>
+        <div className={styles.landing}>
+          <h1>The best blockchain platform <br/>to search your properties</h1>
+          <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, <br/>quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in volupeu fugiat nulla pariatur.</p>
+          <div className={styles.buttons}>
+            <div>
+            <Link href='/brokers'><button>Mortgage Brokers</button></Link>
+            <Link href='/solicitors'><button>Solicitors</button></Link>
+              <button>For Sale</button>
+              <button>To Rent</button>
+              <button>Shortlets</button>
+            </div>
           </div>
         </div>
-
-        <div className={styles.center}>
-          <Image
-            className={styles.logo}
-            src="/next.svg"
-            alt="Next.js Logo"
-            width={180}
-            height={37}
-            priority
-          />
-          <div className={styles.thirteen}>
-            <Image
-              src="/thirteen.svg"
-              alt="13"
-              width={40}
-              height={31}
-              priority
-            />
+        <div className={styles.search_bar}>
+          <div className={styles.divs}>
+            <div>
+              <h4>Locations</h4>
+              <select><option>Select location</option></select>
+            </div>
+            <div>
+              <h4>Property Type</h4>
+              <select><option>Select property type</option></select>
+            </div>
+            <div>
+              <h4>Price Range</h4>
+              <select><option>Select range</option></select>
+            </div>
+            <div className={styles.search}>
+              <button>Search</button>
+            </div>
           </div>
+
         </div>
 
-        <div className={styles.grid}>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Docs <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Find in-depth information about Next.js features and&nbsp;API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Learn <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Learn about Next.js in an interactive course with&nbsp;quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Templates <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Discover and deploy boilerplate example Next.js&nbsp;projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Deploy <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Instantly deploy your Next.js site to a shareable URL
-              with&nbsp;Vercel.
-            </p>
-          </a>
+        <div className={styles.listing_property}>
+          <h2>Listed Properties</h2>
         </div>
+        <input type='text' placeholder='customer name' onChange={(e)=>{ setCustomerName(e.target.value)}}/>
+        <button onClick={consumerRegister}>register</button>
+        <button onClick={consumerSignin}>Sign In</button>
+        <input type='text' placeholder='agent name' onChange={(e)=>{ setAgentName(e.target.value)}}/>
+        <input type='number' placeholder='agent number' onChange={(e)=>{ setAgentNumber(e.target.value)}}/>
+        <button onClick={agentRegister}>Register as agent</button>
+        <div>mortgage broker register</div>
+        <input type='text' placeholder='broker name' onChange={(e)=>{ setBrokerName(e.target.value)}}/>
+        <input type='number' placeholder='broker phone number' onChange={(e)=>{ setBrokerNumber(e.target.value)}}/>
+        <input type='number' placeholder='broker fee' onChange={(e)=>{ setBrokerFee(e.target.value)}}/>
+        <button onClick={brokerRegister}>Register as broker</button>
+        <button onClick={SeeBrokers}>See brokers</button>
       </main>
     </>
   )
