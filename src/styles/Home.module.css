@@ -46,14 +46,14 @@
     padding: 2rem 5rem;
     background-color: #111;
     margin: 0 10rem ;
-    margin-top: -7%;
+    margin-top: -5%;
     color: #ddd;
     width: 72%;
 }
 
 .divs{
     display: flex; 
-    gap: 6rem;
+    gap: 5rem;
     width: 100%;
 }
 
